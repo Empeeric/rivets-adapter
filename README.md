@@ -1,5 +1,5 @@
 rivets-adapter
 ==============
 
-Rivets adapter for Backbone (Models, Collections), and vanilla JavaScript.
-Inspired by ![https://github.com/azproduction/rivets-backbone-adapter](rivets-backbone-adapter).
+[Rivets](http://rivetsjs.com/) adapter for [Backbone](backbonejs.org) (Models, Collections), and vanilla JavaScript.
+Inspired by [rivets-backbone-adapter](https://github.com/azproduction/rivets-backbone-adapter).
