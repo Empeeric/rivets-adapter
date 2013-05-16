@@ -6,7 +6,7 @@ var Backbone = require('backbone'),
     },
     adapter;
 
-require('./public/js/rivets-adapter')(rivets, Backbone);
+require('./js/rivets-adapter')(rivets, Backbone);
 
 var Model = Backbone.Model,
     Collection = Backbone.Collection;

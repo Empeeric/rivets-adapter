@@ -1,0 +1,12 @@
+{
+  "name": "rivets-adapter",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "./node_modules/.bin/nodeunit tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "nodeunit": "",
+    "backbone": ""
+  }
+}
