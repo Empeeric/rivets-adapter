@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>tee</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div class="container">
+
+    <h1>Rivets Tests</h1>
+
+    <ul class="inline">
+        <li><a href="/">Home</a></li>
+    </ul>
+    
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>data-text</th>
+            <th>read</th>
+            <th>publish / notes</th>
+        </tr>
+        </thead>
+    </table>
+
+    <h2>Collection</h2>
+    <ul>
+        <li data-each-model="collection">
+            <p data-text="model.string"></p>
+            <input type="text" data-value="model.string" />
+            <p data-text="model:fn"></p>
+        </li>
+    </ul>
+
+    <h2>Nested Collection</h2>
+    <ul>
+        <li data-each-model="model.collection">
+            <p data-text="model.string"></p>
+            <input type="text" data-value="model.string" />
+            <p data-text="model:fn"></p>
+        </li>
+    </ul>
+
+</div>
+
+
+<script src="js/jquery-1.9.1.min.js"></script>
+<script src="js/underscore-min.js"></script>
+<script src="js/backbone.js"></script>
+<script src="js/rivets.min.js"></script>
+<script src="js/rivets-adapter.js"></script>
+<script>
+
+    var Model = Backbone.Model.extend({
+            fn: function() {
+                return 'Model.fn() was called'
+            }
+        }),
+        Collection = Backbone.Collection;
+
+    var bound = {
+        string: 'Just some text',
+        fn: function() {
+            return 'fn() was called';
+        },
+        object: {
+            string: '1',
+            object: {
+                string: '2.3'
+            }
+        },
+        model: new Model({
+            string: 'model.string',
+            object: {
+                string: 'zzxcvzxcv',
+                object: {
+                    string: 'dasdfa'
+                }
+            },
+            model: new Model({
+                string: '1',
+                object: {
+                    string: 'model.2.3.4'
+                }
+            }),
+            collection: new Collection([
+                new Model({ string: 544151 }),
+                new Model({ string: 12525 })
+            ])
+        }),
+        collection: new Collection([
+            { string: 'abab' },
+            { string: 'abab' }
+        ])
+    };
+
+    var tests = {
+        'string': '',
+        'fn': '',
+        'object.string': '',
+        'object.object.string': '',
+        'model:fn': 'notice bypass (use colon :)',
+        'model.string': 'publish',
+        'model.object.string': 'publish',
+        'model.object.object.string': 'publish',
+        'model.model.string': 'publish',
+        'model.model.object.string': 'publish',
+        'collection:fn': '',
+        'collection.0.string': 'publish'
+    };
+
+    $.each(tests, function(t, note) {
+        $('<tr>' +
+            '<td>'+ t +'</td>' +
+            '<td data-text="'+ t +'"></td>' +
+            (note == 'publish' ? '<td><input type="text" data-value="'+ t +'" /></td>' : '<td>' + note + '</td>') +
+        '</tr>')
+            .appendTo('table');
+    });
+
+    rivets.bind($('.container'), bound);
+
+
+</script>
+
+</body>
+</html>

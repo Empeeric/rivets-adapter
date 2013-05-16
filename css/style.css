@@ -1,0 +1,11 @@
+body {
+    margin: 0; padding: 40px;
+}
+[data-template] {
+    display: none;
+}
+li small { visibility: hidden; }
+li:hover small { visibility: visible; }
+.container {
+    width: 700px;
+}
