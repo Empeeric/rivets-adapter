@@ -1,0 +1,21 @@
+{
+    "name": "rivets-adapter",
+    "repo": "Empeeric/rivets-adapter",
+    "description": "Rivets adapter for Stapes",
+    "version": "0.0.2",
+    "keywords": [
+        "data binding",
+        "templating"
+    ],
+    "scripts": [
+        "adapter.js"
+    ],
+    "main": "adapter.js",
+    "license": "MIT",
+    "ignore": [
+        "example"
+    ],
+    "dependencies": {
+        "rivets": ""
+    }
+}

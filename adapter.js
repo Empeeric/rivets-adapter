@@ -1,4 +1,4 @@
-// Adapter
+// Rivets Adapter
 (function() {
     var onOff = function(action) {
         return function(o, path, cb) {
