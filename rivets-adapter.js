@@ -1,26 +1,14 @@
-(function(factory) {
-    if (typeof exports === 'object')
-        module.exports = factory;
-    else
-        factory(window.rivets, window.Backbone);
-})
-(function(rivets, Backbone) {
-
+// Adapter
+(function() {
     var onOff = function(action) {
         return function(o, path, cb) {
-            if (o instanceof Backbone.Collection)
-                o[action]('add remove reset', cb);
-            else if (o[action])
-                o[action]('change:' + path, cb);
+            if (o[action])
+                o[action](path ? 'change:' + path : 'create remove change', cb);
         }
     };
-
     var readPublish = function(o, path, value) {
-        if (o instanceof Backbone.Collection)
-            o = o.models;
-
         if (!path)
-            return o;
+            return o.get ? o.get() : o;
 
         var p = path.split('.'),
             model = o,
@@ -36,14 +24,12 @@
             else
                 o = o[p.shift()];
 
-            if (o instanceof Backbone.Collection)
-                o = o.models;
-            else if (o == undefined)
-                return undefined;
+            if (o == undefined)
+                return o;
         }
 
         if (read)
-            return o.call ? o.call(model) : o;
+            return o;
 
         if (o.set)
             value = o.set(p.shift(), value);
@@ -57,7 +43,6 @@
 
         return value;
     };
-
     rivets.configure({
         adapter: {
             subscribe: onOff('on'),
@@ -66,5 +51,4 @@
             publish: readPublish
         }
     });
-
-});
+})();
