@@ -13,7 +13,8 @@
     "main": "adapter.js",
     "license": "MIT",
     "ignore": [
-        "example"
+        "example",
+        "tests"
     ],
     "dependencies": {
         "rivets": ""
