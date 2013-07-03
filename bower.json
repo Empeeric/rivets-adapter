@@ -2,7 +2,7 @@
   "name": "rivets-adapter",
   "repo": "Empeeric/rivets-adapter",
   "description": "Rivets adapter for Stapes",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "keywords": [
     "data binding",
     "templating"

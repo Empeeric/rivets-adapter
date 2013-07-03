@@ -2,13 +2,13 @@
 (function() {
     var onOff = function(action) {
         return function(o, path, cb) {
-            if (o[action])
+            if (o && o[action])
                 o[action](path ? 'change:' + path : 'create remove change', cb);
         }
     };
     var readPublish = function(o, path, value) {
         if (!path)
-            return o.get ? o.get() : o;
+            return o && o.get ? o.get() : o;
 
         var p = path.split('.'),
             model = o,
@@ -16,6 +16,9 @@
             whiles = read ? 0 : 1;
 
         while (p.length > whiles) {
+            if (o == undefined)
+                return o;
+
             if (o.get) {
                 model = o;
                 path = p.join('.');
@@ -23,9 +26,6 @@
             }
             else
                 o = o[p.shift()];
-
-            if (o == undefined)
-                return o;
         }
 
         if (read)
